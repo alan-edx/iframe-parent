@@ -5,8 +5,11 @@ const Home: React.FC = () => {
   const handleMessage = (event: MessageEvent) => {
     if (event.origin !== 'http://localhost:3000') return;
 
+    console.log('Received message:', event.data);
+
     if (event.data.type === 'SET_COOKIE') {
-      const cookieData = event.data.cookieData;
+      const cookieData = event.data.encCookieData;
+      console.log('Cookie Data:', cookieData);
       document.cookie = cookieData; 
       console.log('Cookie set from iframe:', cookieData);
     }
