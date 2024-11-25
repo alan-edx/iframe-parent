@@ -1,7 +1,11 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 
 const Home: React.FC = () => {
-  
+  const iframeRef = useRef<HTMLIFrameElement>(null);
+  // const clientId = "2e799083-730b-40c9-ada0-d50f8a5c0357"
+  const clientId = "6d4ead19-b011-488c-97e4-b506bf5d6cd2"
+  const deviceId = "Yd473Xajz7L6w7uwiL6kSokFwiBcAHuQlJd8PBPbxLrgzqxFNW11cgAqkPTPa6YEyx0qBHxJvlhIxFAxwFg3pA=="; 
+
   const handleMessage = (event: MessageEvent) => {
     if (event.origin !== 'http://localhost:3000') return;
 
@@ -13,28 +17,6 @@ const Home: React.FC = () => {
       document.cookie = cookieData; 
       console.log('Cookie set from iframe:', cookieData);
     }
-    // if (event.data.type === 'SET_LOCAL_STORAGE') {
-    //   localStorage.setItem(event.data.key, event.data.value);
-    //   console.log(`Set localStorage: ${event.data.key} = ${event.data.value}`);
-    // }
-
-    // if (event.data.type === 'GET_LOCAL_STORAGE') {
-    //   const value = localStorage.getItem(event.data.key);
-    //   if (event.source && typeof event.source.postMessage === 'function') {
-    //     (event.source.postMessage as (message: any, targetOrigin: string) => void)(
-    //       { type: 'LOCAL_STORAGE_DATA', key: event.data.key, value },
-    //       event.origin
-    //     );
-    //   }
-    // }
-    // const localStorageKey = 'localKey';
-    // const localStorageValue = 'localValue';
-    // window.parent.postMessage({ type: 'SET_LOCAL_STORAGE', key: localStorageKey, value: localStorageValue }, 'http://localhost:3005');
-    
-    // // Send SessionStorage Data
-    // const sessionStorageKey = 'sessionKey';
-    // const sessionStorageValue = 'sessionValue';
-    // window.parent.postMessage({ type: 'SET_SESSION_STORAGE', key: sessionStorageKey, value: sessionStorageValue }, 'http://localhost:3005');
   };
 
   useEffect(() => {
@@ -44,6 +26,19 @@ const Home: React.FC = () => {
       window.removeEventListener('message', handleMessage);
     };
   }, []);
+
+  useEffect(() => {
+    // Send the clientId and deviceId to the iframe once it's loaded
+    const iframe = iframeRef.current;
+    if (iframe) {
+      iframe.onload = () => {
+        iframe.contentWindow?.postMessage(
+          { clientId, deviceId },
+          'http://localhost:3000'
+        );
+      };
+    }
+  }, [clientId, deviceId]);
 
   return (
     <div>
