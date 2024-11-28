@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 const Header: React.FC = () => {
   return (
     <header style={headerStyle}>
-      <div style={logoStyle}>Iframe Demo app</div>
       <nav>
         <ul style={navListStyle}>
           <li style={navItemStyle}>

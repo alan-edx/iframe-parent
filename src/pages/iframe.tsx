@@ -3,7 +3,9 @@ import React, { useEffect, useRef } from 'react';
 const IFrame: React.FC = () => {
   const iframeRef = useRef<HTMLIFrameElement>(null);
   // const clientId = "2e799083-730b-40c9-ada0-d50f8a5c0357"
-  const clientId = "6d4ead19-b011-488c-97e4-b506bf5d6cd2"
+  // const clientId = "6d4ead19-b011-488c-97e4-b506bf5d6cd2"
+  // const clientId = "7db3cc91-7adc-484b-adcc-f6676754bff9"
+  const clientId = "6b0e2a9a-da01-4b1f-872b-7bb14c8cf5d8" //yopmail-alan
   const deviceId = "Yd473Xajz7L6w7uwiL6kSokFwiBcAHuQlJd8PBPbxLrgzqxFNW11cgAqkPTPa6YEyx0qBHxJvlhIxFAxwFg3pA=="; 
 
   const handleMessage = (event: MessageEvent) => {
@@ -32,6 +34,7 @@ const IFrame: React.FC = () => {
     const iframe = iframeRef.current;
     if (iframe) {
       iframe.onload = () => {
+        console.log("Sending message to iframe--->>>>11111", { clientId, deviceId });
         iframe.contentWindow?.postMessage(
           { clientId, deviceId },
           'http://localhost:3000'
@@ -42,13 +45,13 @@ const IFrame: React.FC = () => {
 
   return (
     <div>
-      <h1>Iframe</h1>
       <iframe
+        ref={iframeRef}
         src="http://localhost:3000" // URL of your iframe
         title="Other React App"
         style={{
-          width: '800px', 
-          height: '600px',
+          width: '1000px', 
+          height: '800px',
           border: 'none',
         }}
       />
