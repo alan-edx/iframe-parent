@@ -9,7 +9,8 @@ const IFrame: React.FC = () => {
   const deviceId = "Yd473Xajz7L6w7uwiL6kSokFwiBcAHuQlJd8PBPbxLrgzqxFNW11cgAqkPTPa6YEyx0qBHxJvlhIxFAxwFg3pA=="; 
 
   const handleMessage = (event: MessageEvent) => {
-    if (event.origin !== 'http://localhost:3000') return;
+    // if (event.origin !== 'http://localhost:3000') return;
+    if (event.origin !== 'https://bstampiframedemo.io-world.com') return;
 
     console.log('Received message:', event.data);
 
@@ -34,10 +35,9 @@ const IFrame: React.FC = () => {
     const iframe = iframeRef.current;
     if (iframe) {
       iframe.onload = () => {
-        console.log("Sending message to iframe--->>>>11111", { clientId, deviceId });
         iframe.contentWindow?.postMessage(
           { clientId, deviceId },
-          'http://localhost:3000'
+          'https://bstampiframedemo.io-world.com'
         );
       };
     }
@@ -47,7 +47,7 @@ const IFrame: React.FC = () => {
     <div>
       <iframe
         ref={iframeRef}
-        src="http://localhost:3000" // URL of your iframe
+        src="https://bstampiframedemo.io-world.com" // URL of your iframe
         title="Other React App"
         style={{
           width: '1000px', 
