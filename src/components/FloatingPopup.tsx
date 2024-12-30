@@ -62,7 +62,7 @@ const FloatingPopup: React.FC = () => {
             }}
           >
             <IFrameComponent
-              src="https://bstampiframedemo.io-world.com"
+              src="https://bstampiframe.io-world.com/"
               width="100%"
               height="100%"
             />

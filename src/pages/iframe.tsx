@@ -10,7 +10,7 @@ const IFrame: React.FC = () => {
 
   const handleMessage = (event: MessageEvent) => {
     // if (event.origin !== 'http://localhost:3000') return;
-    if (event.origin !== 'https://bstampiframedemo.io-world.com') return;
+    // if (event.origin !== 'https://bstampiframe.io-world.com/') return;
 
     console.log('Received message:', event.data);
 
@@ -37,7 +37,7 @@ const IFrame: React.FC = () => {
       iframe.onload = () => {
         iframe.contentWindow?.postMessage(
           { clientId, deviceId },
-          'https://bstampiframedemo.io-world.com'
+          'https://bstampiframe.io-world.com/'
         );
       };
     }
@@ -47,7 +47,7 @@ const IFrame: React.FC = () => {
     <div>
       <iframe
         ref={iframeRef}
-        src="https://bstampiframedemo.io-world.com" // URL of your iframe
+        src="https://bstampiframe.io-world.com/" // URL of your iframe
         title="Other React App"
         style={{
           width: '1000px', 
