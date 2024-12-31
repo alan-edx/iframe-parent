@@ -6,16 +6,11 @@ const IFrame: React.FC = () => {
   const deviceId = "Yd473Xajz7L6w7uwiL6kSokFwiBcAHuQlJd8PBPbxLrgzqxFNW11cgAqkPTPa6YEyx0qBHxJvlhIxFAxwFg3pA=="; 
 
   const handleMessage = (event: MessageEvent) => {
-    // if (event.origin !== 'http://localhost:3000') return;
     // if (event.origin !== 'https://bstampiframe.io-world.com/') return;
-
-    console.log('Received message:', event.data);
-
+    
     if (event.data.type === 'SET_COOKIE') {
       const cookieData = event.data.encCookieData;
-      console.log('Cookie Data:', cookieData);
       document.cookie = cookieData; 
-      console.log('Cookie set from iframe:', cookieData);
     }
   };
 
@@ -28,7 +23,6 @@ const IFrame: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    // Send the clientId and deviceId to the iframe once it's loaded
     const iframe = iframeRef.current;
     if (iframe) {
       iframe.onload = () => {
@@ -44,8 +38,8 @@ const IFrame: React.FC = () => {
     <div>
       <iframe
         ref={iframeRef}
-        src="https://bstampiframe.io-world.com/" // URL of your iframe
-        title="Other React App"
+        src="https://bstampiframe.io-world.com/"
+        title="bStamp iframe"
         style={{
           width: '1000px', 
           height: '800px',
